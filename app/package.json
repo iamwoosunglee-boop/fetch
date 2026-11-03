@@ -1,0 +1,27 @@
+{
+  "name": "fetch-app",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/electron/main/index.js",
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc --noEmit && tsc -p tsconfig.electron.json && vite build",
+    "build:web": "vite build --config vite.web.config.mts",
+    "serve:web": "node scripts/serve-web.mjs",
+    "dev": "node scripts/dev.mjs",
+    "test:electron": "PROTO1_HIDDEN=1 node scripts/verify-first-run.mjs && PROTO1_HIDDEN=1 node scripts/verify-v3-app.mjs && npm run test:ime",
+    "test:ime": "PROTO1_HIDDEN=1 node scripts/verify-ime.mjs",
+    "package:mac": "electron-builder --config electron-builder.config.cjs --mac dmg --arm64 --publish never",
+    "package:win": "electron-builder --config electron-builder.config.cjs --win zip --x64 --publish never"
+  },
+  "devDependencies": {
+    "@huggingface/transformers": "3.8.1",
+    "@types/node": "^22.0.0",
+    "electron": "45.1.0",
+    "electron-builder": "26.0.12",
+    "playwright": "1.56.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vitest": "^3.2.4"
+  }
+}

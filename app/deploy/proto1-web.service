@@ -1,0 +1,20 @@
+[Unit]
+Description=proto1 web demo
+After=network-online.target proto1-relay.service
+Wants=network-online.target
+
+[Service]
+Environment=PORT=14173
+EnvironmentFile=/opt/proto1/proto1.env
+ExecStart=/usr/bin/env node /opt/proto1/web-server.mjs
+DynamicUser=yes
+NoNewPrivileges=yes
+ProtectHome=yes
+ProtectSystem=strict
+MemoryHigh=128M
+MemoryMax=192M
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

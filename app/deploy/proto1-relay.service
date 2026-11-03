@@ -1,0 +1,22 @@
+[Unit]
+Description=proto1 Haiku relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+LoadCredential=anthropic_api_key:/etc/proto1/anthropic_api_key
+Environment=ANTHROPIC_API_KEY_FILE=%d/anthropic_api_key
+Environment=PORT=18787
+EnvironmentFile=/opt/proto1/proto1.env
+ExecStart=/usr/bin/env node /opt/proto1/relay/server/main.js
+DynamicUser=yes
+NoNewPrivileges=yes
+ProtectHome=yes
+ProtectSystem=strict
+MemoryHigh=96M
+MemoryMax=128M
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
